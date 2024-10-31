@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choose Your Path</title>
+    <style>
+        /* General Style */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #121212; /* Black background */
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            box-sizing: border-box;
+            flex-direction: column;
+        }
+
+        /* Root container */
+        .root-container {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .root-container h1 {
+            font-size: 36px;
+            color: #f1c40f; /* Gold heading */
+            margin-bottom: 20px;
+        }
+
+        /* Path container for the two boxes */
+        .path-container {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            position: relative;
+        }
+
+        /* Individual choice boxes */
+        .path-box {
+            background-color: #1e1e1e;
+            border: 2px solid #f1c40f;
+            padding: 20px 30px;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            width: 200px;
+        }
+
+        /* Hover Effects */
+        .escape-box:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px 5px rgba(0, 153, 255, 0.6); /* Light blue glowing shadow for ESCAPE */
+        }
+
+        .netflix-box:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px 5px rgba(255, 0, 0, 0.6); /* Light red glowing shadow for Netflix */
+        }
+
+        .path-box h2 {
+            font-size: 18px;
+            color: white;
+            margin-bottom: 10px;
+        }
+
+        /* Root line connector */
+        .line {
+            width: 2px;
+            height: 50px;
+            background-color: #f1c40f;
+            position: absolute;
+            top: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* Form styling */
+        .form-container {
+            display: none;
+            background-color: #1e1e1e;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .form-container h2 {
+            text-align: center;
+            color: #f1c40f; /* Gold heading color */
+            margin-bottom: 20px;
+        }
+
+        .form-container label {
+            display: block;
+            margin-bottom: 5px;
+            color: white;
+        }
+
+        .form-container input,
+        .form-container select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+            border: 1px solid #333;
+            background-color: #222;
+            color: white;
+        }
+
+        /* Form row for country and status */
+        .form-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        .form-container button {
+            width: 100%;
+            padding: 10px;
+            background-color: #f1c40f;
+            color: black;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .form-container button:hover {
+            background-color: #e1b700;
+        }
+
+        .back-button {
+            background-color: #e74c3c; /* Red button */
+        }
+
+        /* Success Message */
+        .success-container {
+            display: none;
+            background-color: #424242;
+            text-align: center;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .success-container h1 {
+            font-size: 36px;
+            color: white;
+        }
+
+        .success-container p {
+            font-size: 16px;
+            color: #ddd;
+            margin-top: 10px;
+        }
+
+        .success-container img {
+            width: 100px;
+            margin-bottom: 20px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .path-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .line {
+                display: none;
+            }
+
+            .path-box {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .form-container {
+                max-width: 100%;
+            }
+
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Root Container -->
+    <div class="root-container">
+        <h1>CHOOSE YOUR PATH</h1>
+    </div>
+
+    <!-- Path Container -->
+    <div class="path-container">
+        <div class="line"></div> <!-- Root line -->
+        
+        <!-- Box 1: Escape the Matrix -->
+        <div class="path-box escape-box" onclick="goToForm()">
+            <h2>ESCAPE THE MATRIX</h2>
+            <h4>Would You Like to Be a Name or a Number?</h4>
+        </div>
+
+        <!-- Box 2: Go watch Netflix, work 9-5 -->
+        <div class="path-box netflix-box" onclick="goToNetflix()">
+            <h2>GO WATCH NETFLIX</h2>
+            <small>Work 9-5</small>
+        </div>
+    </div>
+
+    <!-- Form will be shown on the same page (hidden initially)-->
+    <div class="form-container">
+        <h2>Take Action</h2>
+        <form id="businessForm" action="https://submit-form.com/libG3Shrz"> 
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required placeholder="Enter your name">
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="country">Country:</label>
+                    <select id="country" name="country" onchange="updateStatusOptions()" required>
+                        <option value="" disabled selected>Select your country</option>
+                        <option value="canada">Canada</option>
+                        <option value="usa">USA</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="status">Status:</label>
+                    <select id="status" name="status" required>
+                        <option value="" disabled selected>Select your status</option>
+                    </select>
+                </div>
+            </div>
+
+            <label for="instagram">Instagram ID:</label>
+            <input type="text" id="instagram" name="instagram" required placeholder="Enter your Instagram ID">
+
+            <label for="email">Email (optional):</label>
+            <input type="email" id="email" name="email" placeholder="Enter your email">
+
+            <label for="phone">Phone Number (optional):</label>
+            <input type="tel" id="phone" name="phone" placeholder="Enter your phone number">
+
+            <button type="submit" onsubmit="return showSuccessMessage()">Submit</button>
+            <button type="button" class="back-button" onclick="goBack()">Remain A Slave</button>
+        </form>
+        <small>Your email and phone number are optional but recommended.</small>
+    </div>
+
+    <!-- Success message will be shown after form submission -->
+    <div class="success-container">
+        <img src="cage.png" alt="Break Free">
+        <h1>Winners just take one more step than others.</h1>
+        <p>YOU TOOK THAT STEP. BE PROUD</p>
+    </div>
+
+    <script>
+        // Function to show form when ESCAPE THE MATRIX is clicked
+        function goToForm() {
+            document.querySelector('.path-container').style.display = 'none';
+            document.querySelector('.root-container').style.display = 'none';
+            document.querySelector('.form-container').style.display = 'block';
+        }
+
+        // Function for the Netflix button (optional logic here)
+        function goToNetflix() {
+            alert("Watching business movie won't make you rich without ACTION. Enjoy your Netflix & Be a number in name.");
+        }
+
+        // Function to go back to the main screen
+        function goBack() {
+            document.querySelector('.form-container').style.display = 'none';
+            document.querySelector('.path-container').style.display = 'flex';
+            document.querySelector('.root-container').style.display = 'block';
+        }
+
+        // Update status options based on country selection
+        function updateStatusOptions() {
+            const country = document.getElementById('country').value;
+            const statusSelect = document.getElementById('status');
+
+            statusSelect.innerHTML = ''; // Clear previous options
+
+            if (country === 'canada') {
+                statusSelect.innerHTML += '<option value="work_permit">Work Permit</option>';
+                statusSelect.innerHTML += '<option value="student">Student</option>';
+                statusSelect.innerHTML += '<option value="pr">Permanent Resident (PR)</option>';
+                statusSelect.innerHTML += '<option value="citizen">Citizen</option>';
+            } else if (country === 'usa') {
+                statusSelect.innerHTML += '<option value="student">Student</option>';
+                statusSelect.innerHTML += '<option value="green_card">Green Card</option>';
+                statusSelect.innerHTML += '<option value="citizen">Citizen</option>';
+            }
+        }
+
+      // Simple form validation and success message display
+      function showSuccessMessage() {
+            event.preventDefault(); // Prevent actual form submission
+            document.querySelector('.form-container').style.display = 'none';
+            document.querySelector('.success-container').style.display = 'block'; // Show the success message
+        }
+ 
+    </script>
+
+</body>
+</html>
